@@ -7,8 +7,8 @@
     <ProjectGuid>{8CFD0960-CF89-4130-B31C-B5EC2B3DCCBC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Pixels_Net</RootNamespace>
-    <AssemblyName>Pixels-Net</AssemblyName>
+    <RootNamespace>Pixels.Core</RootNamespace>
+    <AssemblyName>PixelsNet</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -49,6 +49,8 @@
     <Compile Include="Filters\NoiseFilter.cs" />
     <Compile Include="Filters\OffsetFilter.cs" />
     <Compile Include="Filters\SpecksFilter.cs" />
+    <Compile Include="Globals.cs" />
+    <Compile Include="Models\FilterInfo.cs" />
     <Compile Include="PixelNet.cs" />
     <Compile Include="PixelProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

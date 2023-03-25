@@ -4,11 +4,12 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace Pixels_Net
+namespace Pixels.Core
 {
     public unsafe class PixelsProcessor
     {
@@ -83,8 +84,8 @@ namespace Pixels_Net
         private int width = 0;
 
         private BitmapData bitmapData = null;
-        private Byte* pBase = null;
-
+        private byte* pBase = null;
+        protected byte[] pixelsList = null;
         protected PixelsProcessor(Bitmap bitmap)
         {
             this.bitmap = bitmap;
@@ -93,12 +94,11 @@ namespace Pixels_Net
         {
             MemoryStream ms = new MemoryStream(bytesArray);
             var btemp = new Bitmap(ms);
-            this.bitmap = btemp.Clone(new Rectangle(0, 0, btemp.Width, btemp.Height), PixelFormat.Format32bppArgb);
-            //bitmap.
+            bitmap = btemp.Clone(new Rectangle(0, 0, btemp.Width, btemp.Height), PixelFormat.Format32bppArgb);
         }
         protected PixelsProcessor(string bitmapPath)
         {
-            this.bitmap = new Bitmap(bitmapPath);
+            bitmap = new Bitmap(bitmapPath);
         }
         protected PixelsProcessor()
         {
@@ -130,7 +130,7 @@ namespace Pixels_Net
             }
             set
             {
-                this.bitmap = value;
+                bitmap = value;
             }
         }
 
@@ -146,7 +146,7 @@ namespace Pixels_Net
                 return new Point((int)bounds.Width, (int)bounds.Height);
             }
         }
-
+        
         protected HSLData RGBtoHSL(int Red, int Green, int Blue)
         {
             HSLData hsl = new HSLData();
@@ -308,10 +308,20 @@ namespace Pixels_Net
             }
 
             bitmapData = bitmap.LockBits(bounds, ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
-
+            
             pBase = (Byte*)bitmapData.Scan0.ToPointer();
         }
-
+        protected void LoadPixels()
+        {
+            IntPtr ptr = bitmapData.Scan0;
+            pixelsList = new byte[bitmapData.Stride * bitmap.Height];
+            Marshal.Copy(ptr, pixelsList, 0, pixelsList.Length);
+        }
+        protected void SetPixels()
+        {
+            IntPtr ptr = bitmapData.Scan0;
+            Marshal.Copy(pixelsList, 0, ptr, pixelsList.Length);
+        }
         protected PixelData* PixelAt(int x, int y)
         {
             return (PixelData*)(pBase + y * width + x * sizeof(PixelData));
@@ -572,7 +582,7 @@ namespace Pixels_Net
         }
 
         /// <summary>
-        /// Made by anis ahmed bhutta
+        /// Made by Anis
         /// </summary>
         /// <param name="softenGreen"></param>
         /// <param name="width"></param>

@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pixels_Net.Filters
+namespace Pixels.Core
 {
-    public class SpecksFilter : PixelsProcessor
+    public class Globals
     {
+
     }
 }

@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pixels_Net.Filters
+namespace Pixels.Core.Filters
 {
-    public class GammaFilter : PixelsProcessor
+    public unsafe class SpecksFilter : PixelsProcessor
     {
+
     }
 }

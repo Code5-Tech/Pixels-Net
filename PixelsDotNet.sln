@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pixels-Net", "Pixels-Net\Pixels-Net.csproj", "{8CFD0960-CF89-4130-B31C-B5EC2B3DCCBC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pixels.TestApp", "Pixels.TestApp\Pixels.TestApp.csproj", "{9EDEB7D4-7A42-4F95-BC66-4234F9A7FE53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixelNet.TestApp", "PixelNet.TestApp\PixelNet.TestApp.csproj", "{9CBB661D-A017-4EE3-945C-BBA0DE97FC4E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pixels.Core", "Pixels.Core\Pixels.Core.csproj", "{8CFD0960-CF89-4130-B31C-B5EC2B3DCCBC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9EDEB7D4-7A42-4F95-BC66-4234F9A7FE53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EDEB7D4-7A42-4F95-BC66-4234F9A7FE53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EDEB7D4-7A42-4F95-BC66-4234F9A7FE53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EDEB7D4-7A42-4F95-BC66-4234F9A7FE53}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8CFD0960-CF89-4130-B31C-B5EC2B3DCCBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8CFD0960-CF89-4130-B31C-B5EC2B3DCCBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CFD0960-CF89-4130-B31C-B5EC2B3DCCBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CFD0960-CF89-4130-B31C-B5EC2B3DCCBC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9CBB661D-A017-4EE3-945C-BBA0DE97FC4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9CBB661D-A017-4EE3-945C-BBA0DE97FC4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9CBB661D-A017-4EE3-945C-BBA0DE97FC4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9CBB661D-A017-4EE3-945C-BBA0DE97FC4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
