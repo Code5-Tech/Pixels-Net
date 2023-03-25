@@ -134,7 +134,11 @@ namespace Pixels.Core
             }
         }
 
-
+         protected byte CheckByte(double value)
+        {
+            if (value < 0) return 0;
+            return (byte)Math.Min(value, 255);
+        }
 
         protected Point PixelSize
         {

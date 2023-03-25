@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -46,11 +47,11 @@ namespace Pixels.Core.Filters
                     {
                         inc = 0;
                     }
-                    var avg = (pPixel->red+ pPixel->green+ pPixel->blue) / 3;
+                    var avg = (pPixel->red + pPixel->green + pPixel->blue) / 3;
 
-                    pPixel->red = (byte)(avg + inc);
-                    pPixel->green = (byte)(avg + 70);
-                    pPixel->blue = (byte)(avg + 20);
+                    pPixel->red = CheckByte(avg + inc);
+                    pPixel->green = CheckByte(avg + 70);
+                    pPixel->blue = CheckByte(avg + 20);
                     pPixel++;
                 }
             }
@@ -71,9 +72,9 @@ namespace Pixels.Core.Filters
                     }
                     var avg = (pPixel->red + pPixel->green + pPixel->blue) / 3;
 
-                    pPixel->red = (byte)(avg + inc);
-                    pPixel->green = (byte)(avg + 70);
-                    pPixel->blue = (byte)(avg + 20);
+                    pPixel->red = CheckByte(avg + inc);
+                    pPixel->green = CheckByte(avg + 70);
+                    pPixel->blue = CheckByte(avg + 20);
                     pPixel++;
                 }
             }
@@ -94,9 +95,9 @@ namespace Pixels.Core.Filters
                     }
                     var avg = (pPixel->red + pPixel->green + pPixel->blue) / 3;
 
-                    pPixel->red = (byte)(avg + 5);
-                    pPixel->green = (byte)(avg + inc);
-                    pPixel->blue = (byte)(avg + 20);
+                    pPixel->red = CheckByte(avg + 5);
+                    pPixel->green = CheckByte(avg + inc);
+                    pPixel->blue = CheckByte(avg + 20);
                     pPixel++;
                 }
             }
