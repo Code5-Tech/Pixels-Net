@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -37,7 +38,28 @@ namespace Pixels.Core.Filters
             LoadPixels();
             for (int i = 0; i < pixelsList.Length; i += 4)
             {
-                pixelsList[i] = ((i + 4 * offset * offset) > pixelsList.Length) ? (byte)0 : pixelsList[i + 4 * offset];
+                pixelsList[i+2] = ((i + 4 * offset * offset) > pixelsList.Length) ? (byte)0 : pixelsList[i + 4 * offset];
+            }
+            SetPixels();
+        }
+
+        public void extreme_offset_red()
+        {
+            var offset = 35;
+            LoadPixels();
+            for (int i = 0; i < pixelsList.Length; i += 4)
+            {
+                pixelsList[i+2] = ((i + 4 * offset * offset) > pixelsList.Length) ? (byte)0 : pixelsList[i + 4 * offset];
+            }
+            SetPixels();
+        }
+        public void extra_offset_red()
+        {
+            var offset = 15;
+            LoadPixels();
+            for (int i = 0; i < pixelsList.Length; i += 4)
+            {
+                pixelsList[i + 2] = ((i + 4 * offset * offset) > pixelsList.Length) ? (byte)0 : pixelsList[i + 4 * offset];
             }
             SetPixels();
         }
@@ -51,37 +73,6 @@ namespace Pixels.Core.Filters
             }
             SetPixels();
         }
-        public void offset_blue()
-        {
-            var offset = 5;
-            LoadPixels();
-            for (int i = 0; i < pixelsList.Length; i += 4)
-            {
-                pixelsList[i+2] = ((i + 4 * offset * offset) > pixelsList.Length) ? (byte)0 : pixelsList[i + 4 * offset];
-            }
-            SetPixels();
-        }
-        public void extreme_offset_blue()
-        {
-            var offset = 35;
-            LoadPixels();
-            for (int i = 0; i < pixelsList.Length; i += 4)
-            {
-                pixelsList[i + 2] = ((i + 4 * offset * offset) > pixelsList.Length) ? (byte)0 : pixelsList[i + 4 * offset];
-            }
-            SetPixels();
-        }
-        public void extra_offset_blue()
-        {
-            var offset = 15;
-            LoadPixels();
-            for (int i = 0; i < pixelsList.Length; i += 4)
-            {
-                pixelsList[i + 2] = ((i + 4 * offset * offset) > pixelsList.Length) ? (byte)0 : pixelsList[i + 4 * offset];
-            }
-            SetPixels();
-        }
-        
         public void extreme_offset_green()
         {
             var offset = 35;
@@ -102,7 +93,17 @@ namespace Pixels.Core.Filters
             }
             SetPixels();
         }
-        public void extreme_offset_red()
+        public void offset_blue()
+        {
+            var offset = 5;
+            LoadPixels();
+            for (int i = 0; i < pixelsList.Length; i += 4)
+            {
+                pixelsList[i] = ((i + 4 * offset * offset) > pixelsList.Length) ? (byte)0 : pixelsList[i + 4 * offset];
+            }
+            SetPixels();
+        }
+        public void extreme_offset_blue()
         {
             var offset = 35;
             LoadPixels();
@@ -112,7 +113,7 @@ namespace Pixels.Core.Filters
             }
             SetPixels();
         }
-        public void extra_offset_red()
+        public void extra_offset_blue()
         {
             var offset = 15;
             LoadPixels();
@@ -122,17 +123,35 @@ namespace Pixels.Core.Filters
             }
             SetPixels();
         }
-        
+
         public void rgb_split()
         {
             LoadPixels();
             for (int i = 0; i < pixelsList.Length; i += 4)
             {
-                pixelsList[i-500] = pixelsList[i];
-                pixelsList[i+500] = pixelsList[i+1];
-                pixelsList[i-300] = pixelsList[i+2];
+                //var red = pixelsList[Math.Min(i, pixelsList.Length-1)];
+                //pixelsList[i] = red;
+                // if (i < pixelsList.Length - 500)
+                //     pixelsList[Math.Min(i + 500, pixelsList.Length - 5)] = pixelsList[i + 1];
+                // else
+                //     pixelsList[i + 1] = 0;
+                //if (i>300) 
+                //     pixelsList[Math.Max(i - 300, 0)] = pixelsList[i+2];      
+                // else
+                //     pixelsList[i+2] = 0;
+                //215, 208, 152, 255, 223, 209, 149, 255, 219, 207
+                int r = i - 150;
+                int g = i + 500;
+                int b = i - 300;
+                if (r>=0)
+                    pixelsList[r] = pixelsList[i];
+                if(g<pixelsList.Length-4) 
+                    pixelsList[g] = pixelsList[i + 1];
+                if(b>=0)
+                    pixelsList[b] = pixelsList[i+2];
             }
             SetPixels();
+            //File.WriteAllText("new_pix.txt", string.Join(", ", pixelsList));
         }
     }
 }

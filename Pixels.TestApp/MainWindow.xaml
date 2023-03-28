@@ -15,7 +15,7 @@
             </ScrollViewer>
         </Grid>
         <DockPanel>
-            <Grid DockPanel.Dock="Top" Height="60">
+            <Grid DockPanel.Dock="Top" Height="60" Background="LightYellow">
                 <Button Width="100" Height="40" Content="Browse..." Name="btnBrowse" Click="btnBrowse_Click" HorizontalAlignment="Left" Margin="10" />
             </Grid>
             <Grid>
@@ -23,11 +23,11 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0" Background="LightYellow">
-                    <Image Name="imgSource" Stretch="UniformToFill" />
+                <Grid Grid.Column="0" Background="White">
+					<Image Name="imgSource" Stretch="Uniform" Margin="20" />
                 </Grid>
-                <Grid Grid.Column="1" Background="LightGreen">
-                    <Image Name="imgResult" Stretch="UniformToFill" />
+				<Grid Grid.Column="1" Background="White">
+					<Image Name="imgResult" Stretch="Uniform" Margin="20" />
                 </Grid>
             </Grid>
         </DockPanel>

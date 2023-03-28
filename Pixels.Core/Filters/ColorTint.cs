@@ -44,18 +44,13 @@ namespace Pixels.Core.Filters
             SetPixels();
         }
         public void coral()
-        {
-            Point size = PixelSize;
-            for (int y = 0; y < size.Y; y++)
+        {            
+            LoadPixels();
+            for (int i = 0; i < pixelsList.Length; i += 4)
             {
-                PixelData* pPixel = PixelAt(0, y);
-                for (int x = 0; x < size.X; x++)
-                {
-                    pPixel->blue = (byte)(pPixel->green + 50);
-
-                    pPixel++;
-                }
+                pixelsList[i + 2] = (byte)(pixelsList[i+1] + 50);
             }
+            SetPixels();
         }
         public void frontward()
         {
