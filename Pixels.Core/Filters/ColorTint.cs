@@ -37,18 +37,19 @@ namespace Pixels.Core.Filters
         public void lemon()
         {
             LoadPixels();
-            for (int i = 0; i < pixelsList.Length; i+=4)
+            for (int i = 0; i < pixelsList.Length; i += 4)
             {
-                pixelsList[i + 1] = (byte)(pixelsList[i] + 50);
+                pixelsList[i + 1] = CheckByte(pixelsList[i + 2] + 50);
             }
             SetPixels();
+
         }
         public void coral()
         {            
             LoadPixels();
             for (int i = 0; i < pixelsList.Length; i += 4)
             {
-                pixelsList[i + 2] = (byte)(pixelsList[i+1] + 50);
+                pixelsList[i + 2] = CheckByte(pixelsList[i + 2] + 50);
             }
             SetPixels();
         }
@@ -61,7 +62,7 @@ namespace Pixels.Core.Filters
                 for (int x = 0; x < size.X; x++)
                 {
                     pPixel->red = pPixel->blue;
-                    pPixel->blue = (byte)(pPixel->green + 50);
+                    pPixel->blue = (byte)(CheckByte(pPixel->green + 50));
 
                     pPixel++;
                 }
@@ -75,9 +76,9 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red += 120;
-                    pPixel->green += 70;
-                    pPixel->blue += 13;
+                    pPixel->red = CheckByte(pPixel->red + 120);
+                    pPixel->green = CheckByte(pPixel->green + 70);
+                    pPixel->blue = CheckByte(pPixel->blue + 13);
 
                     pPixel++;
                 }

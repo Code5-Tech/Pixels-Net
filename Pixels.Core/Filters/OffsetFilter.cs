@@ -49,7 +49,7 @@ namespace Pixels.Core.Filters
             LoadPixels();
             for (int i = 0; i < pixelsList.Length; i += 4)
             {
-                pixelsList[i+2] = ((i + 4 * offset * offset) > pixelsList.Length) ? (byte)0 : pixelsList[i + 4 * offset];
+                pixelsList[i] = ((i + 4 * offset * offset) > pixelsList.Length) ? (byte)0 : pixelsList[i + 4 * offset];
             }
             SetPixels();
         }
@@ -144,11 +144,11 @@ namespace Pixels.Core.Filters
                 int g = i + 500;
                 int b = i - 300;
                 if (r>=0)
-                    pixelsList[r] = pixelsList[i];
+                    pixelsList[r] = pixelsList[i+2];
                 if(g<pixelsList.Length-4) 
                     pixelsList[g] = pixelsList[i + 1];
                 if(b>=0)
-                    pixelsList[b] = pixelsList[i+2];
+                    pixelsList[b] = pixelsList[i];
             }
             SetPixels();
             //File.WriteAllText("new_pix.txt", string.Join(", ", pixelsList));
