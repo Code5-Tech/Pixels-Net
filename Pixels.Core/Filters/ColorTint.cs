@@ -10,6 +10,7 @@ namespace Pixels.Core.Filters
 {
     public unsafe class ColorTint : PixelsProcessor
     {
+        Random rnd = new Random();
         public ColorTint()
         {
         }
@@ -19,7 +20,10 @@ namespace Pixels.Core.Filters
         }
         public List<string> FiltersList()
         {
-            return "lemon,coral,frontward,vintage".Split(',').ToList();
+            var filters =  "lemon,coral,frontward,vintage,perfume,serenity,pink_aura,haze,mellow,solange_dark," +
+                "zapt,neue,eon,aeon,rosetint,slate,purplescale,radio,twenties,ocean,redgreyscale,greengreyscale,warmth,crimson" +
+                "phase,grime,evening,sunset,wood,lix_conv,ryo_conv,blue_greyscale,solange,solange_grey,cool_twilight,blues,red_effect";
+            return filters.Split(',').ToList();
         }
         public Bitmap Apply(string filterName)
         {
@@ -51,7 +55,7 @@ namespace Pixels.Core.Filters
 
         }
         public void coral()
-        {            
+        {
             LoadPixels();
             for (int i = 0; i < pixelsList.Length; i += 4)
             {
@@ -119,9 +123,9 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    pPixel->red = CheckByte(pPixel->red + 80);
+                    pPixel->green = CheckByte(pPixel->green + 40);
+                    pPixel->blue = CheckByte(pPixel->blue + 120);
 
                     pPixel++;
                 }
@@ -143,9 +147,9 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    pPixel->red = CheckByte(pPixel->red + 10);
+                    pPixel->green = CheckByte(pPixel->green + 40);
+                    pPixel->blue = CheckByte(pPixel->blue + 90);
 
                     pPixel++;
                 }
@@ -167,9 +171,9 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    pPixel->red = CheckByte(pPixel->red + 90);
+                    pPixel->green = CheckByte(pPixel->green + 10);
+                    pPixel->blue = CheckByte(pPixel->blue + 90);
 
                     pPixel++;
                 }
@@ -191,9 +195,9 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    pPixel->red = CheckByte(pPixel->red + 90);
+                    pPixel->green = CheckByte(pPixel->green + 90);
+                    pPixel->blue = CheckByte(pPixel->blue + 10);
 
                     pPixel++;
                 }
@@ -215,9 +219,7 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    pPixel->blue = CheckByte(120 - pPixel->blue);
 
                     pPixel++;
                 }
@@ -237,9 +239,8 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    pPixel->green = CheckByte(255 - pPixel->green);
+                    pPixel->blue = CheckByte(255 - pPixel->blue);
 
                     pPixel++;
                 }
@@ -262,9 +263,9 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    //pPixel->red = CheckByte(pPixel->red + 120);
+                    pPixel->green = CheckByte(255 - pPixel->green);
+                    //pPixel->blue = CheckByte(pPixel->blue + 13);
 
                     pPixel++;
                 }
@@ -286,9 +287,8 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    pPixel->red = CheckByte(pPixel->red + 20);
+                    pPixel->blue = CheckByte(255 - pPixel->blue);
 
                     pPixel++;
                 }
@@ -310,9 +310,8 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    pPixel->green = CheckByte(120 - pPixel->green);
+                    pPixel->blue = CheckByte(100 - pPixel->blue);
 
                     pPixel++;
                 }
@@ -333,9 +332,8 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    pPixel->green = CheckByte(60 - pPixel->green);
+                    pPixel->blue = CheckByte(100 - pPixel->blue);
 
                     pPixel++;
                 }
@@ -356,9 +354,10 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    var avg = (pPixel->red + pPixel->green + pPixel->blue) / 3;
+                    pPixel->red = CheckByte(avg + 80);
+                    pPixel->green = CheckByte(avg + 20);
+                    pPixel->blue = CheckByte(avg + 31);
 
                     pPixel++;
                 }
@@ -381,9 +380,10 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    var avg = (pPixel->red + pPixel->green + pPixel->blue) / 3;
+                    pPixel->red = CheckByte(avg + 4);
+                    pPixel->green = CheckByte(avg + 3);
+                    pPixel->blue = CheckByte(avg + 12);
 
                     pPixel++;
                 }
@@ -407,9 +407,10 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    var avg = (pPixel->red + pPixel->green + pPixel->blue) / 3;
+                    pPixel->red = CheckByte(avg + 90);
+                    pPixel->green = CheckByte(avg + 40);
+                    pPixel->blue = CheckByte(avg + 80);
 
                     pPixel++;
                 }
@@ -432,9 +433,10 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    var avg = (pPixel->red + pPixel->green + pPixel->blue) / 3;
+                    pPixel->red = CheckByte(avg + 5);
+                    pPixel->green = CheckByte(avg + 40);
+                    pPixel->blue = CheckByte(avg + 20);
 
                     pPixel++;
                 }
@@ -458,9 +460,10 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    var avg = (pPixel->red + pPixel->green + pPixel->blue) / 3;
+                    pPixel->red = CheckByte(avg + 18);
+                    pPixel->green = CheckByte(avg + 12);
+                    pPixel->blue = CheckByte(avg + 20);
 
                     pPixel++;
                 }
@@ -483,9 +486,10 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    var avg = (pPixel->red + pPixel->green + pPixel->blue) / 3;
+                    pPixel->red = CheckByte(avg);
+                    pPixel->green = CheckByte(avg);
+                    pPixel->blue = CheckByte(avg);
 
                     pPixel++;
                 }
@@ -508,9 +512,10 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    var avg = (pPixel->red + pPixel->green + pPixel->blue) / 3;
+                    pPixel->red = CheckByte(avg + 100);
+                    pPixel->green = CheckByte(avg + 40);
+                    pPixel->blue = CheckByte(avg + 20);
 
                     pPixel++;
                 }
@@ -533,9 +538,10 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    var avg = (pPixel->red + pPixel->green + pPixel->blue) / 3;
+                    pPixel->red = CheckByte(avg + 20);
+                    pPixel->green = CheckByte(avg + 70);
+                    pPixel->blue = CheckByte(avg + 20);
 
                     pPixel++;
                 }
@@ -558,10 +564,8 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
-
+                    pPixel->red = CheckByte(pPixel->red + 10);
+                    pPixel->green = CheckByte(pPixel->green + 18);
                     pPixel++;
                 }
             }
@@ -581,9 +585,8 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    pPixel->red = CheckByte(pPixel->red + 20);
+                    pPixel->green = CheckByte(pPixel->green + 20);
 
                     pPixel++;
                 }
@@ -604,9 +607,9 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    pPixel->red = CheckByte(pPixel->red + rnd.Next(10, 20));
+                    pPixel->green = CheckByte(pPixel->green + rnd.Next(10, 20));
+                    pPixel->blue = CheckByte(pPixel->blue + rnd.Next(10, 20));
 
                     pPixel++;
                 }
@@ -629,9 +632,8 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    pPixel->red = CheckByte(pPixel->red + 1);
+                    pPixel->green = CheckByte(pPixel->green + 5);
 
                     pPixel++;
                 }
@@ -639,22 +641,23 @@ namespace Pixels.Core.Filters
 
             /*
                 for (i = 0; i < imgData.data.length; i += 4) {
-                    imgData.data[i + 1] = imgData.data[i] + 5;
                     imgData.data[i] = imgData.data[i] + 1;
+                    imgData.data[i + 1] = imgData.data[i] + 5;
                 }
             */
         }
         public void evening()
         {
+            var sat_adj = 60;
             Point size = PixelSize;
             for (int y = 0; y < size.Y; y++)
             {
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    pPixel->red = CheckByte(pPixel->red - sat_adj);
+                    pPixel->green = CheckByte(pPixel->green - sat_adj);
+                    pPixel->blue = CheckByte(pPixel->blue - sat_adj);
 
                     pPixel++;
                 }
@@ -677,9 +680,8 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    pPixel->green = CheckByte(pPixel->green + 50);
+                    pPixel->blue = CheckByte(pPixel->blue + 12);
 
                     pPixel++;
                 }
@@ -700,9 +702,8 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    pPixel->red = CheckByte(pPixel->red + 30);
+                    pPixel->green = CheckByte(pPixel->green + 12);
 
                     pPixel++;
                 }
@@ -723,9 +724,8 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    pPixel->red = CheckByte(255 - pPixel->red);
+                    pPixel->green = CheckByte(255 - pPixel->green);
 
                     pPixel++;
                 }
@@ -746,9 +746,8 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    pPixel->red = CheckByte(255 - pPixel->red);
+                    pPixel->blue = CheckByte(255 - pPixel->blue);
 
                     pPixel++;
                 }
@@ -769,9 +768,11 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+
+                    var avg = (pPixel->red + pPixel->green + pPixel->blue) / 3;
+                    pPixel->red = CheckByte(avg + 20);
+                    pPixel->green = CheckByte(avg + 30);
+                    pPixel->blue = CheckByte(avg + 60);
 
                     pPixel++;
                 }
@@ -794,9 +795,7 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    pPixel->red = CheckByte(255 - pPixel->red);
 
                     pPixel++;
                 }
@@ -816,9 +815,9 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    pPixel->red = pPixel->blue;
+                    pPixel->green = pPixel->green;
+                    pPixel->blue = pPixel->red;
 
                     pPixel++;
                 }
@@ -832,7 +831,7 @@ namespace Pixels.Core.Filters
 
                 }
             */
-        }  
+        }
         public void cool_twilight()
         {
             Point size = PixelSize;
@@ -841,10 +840,8 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
-
+                    pPixel->green = CheckByte(255-pPixel->green);
+                    pPixel->blue = CheckByte(pPixel->blue + 70);
                     pPixel++;
                 }
             }
@@ -865,9 +862,7 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    pPixel->blue = CheckByte(255-pPixel->blue);
 
                     pPixel++;
                 }
@@ -887,9 +882,9 @@ namespace Pixels.Core.Filters
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    pPixel->red = CheckByte(pPixel->red + 200);
+                    pPixel->green = CheckByte(pPixel->green -50);
+                    pPixel->blue = CheckByte(pPixel->blue *0.5);
 
                     pPixel++;
                 }
@@ -903,7 +898,7 @@ namespace Pixels.Core.Filters
                 }
             */
         }
-        
+
     }
 }
 

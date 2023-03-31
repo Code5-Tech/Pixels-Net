@@ -18,6 +18,7 @@ namespace Pixels.Core
         LineFilter lineFilter = null;
         NoiseFilter noiseFilter = null;
         OffsetFilter offsetFilter = null;
+        public List<int> parameters = new List<int>();
         public PixelNet()
         {
             colorTintFilter = new ColorTint();
@@ -69,6 +70,7 @@ namespace Pixels.Core
                     else if (filterInfo.Category == "Offset")
                     {
                         offsetFilter.Load(currentBmp);
+                        offsetFilter.parameters = parameters;
                         offsetFilter.Apply(filterName);
                     }
 
@@ -78,6 +80,11 @@ namespace Pixels.Core
             {
             }
             return currentBmp;
+        }
+
+        public List<int> GetParameters(string filterName)
+        {
+            return new List<int>();
         }
     }
 }

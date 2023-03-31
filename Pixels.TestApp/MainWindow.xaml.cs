@@ -77,18 +77,28 @@ namespace Pixels.TestApp
                         imgSource.Source = UIHelper.BitmapFromUri(new Uri(sourceImagePath));
                     }
                 }
-               
-                if(sourceBtm!=null)
-                {
-                    var filterName = b.Tag.ToString().ToLower();
-                    var result = pNet.Process(sourceBtm, filterName);
-                    imgResult.Source = UIHelper.ToWpfBitmap(result);
-                }
+                currentFilter = b.Tag.ToString();
+                applyFilter(currentFilter);
+            }
+        }
+
+        void applyFilter(string filterName)
+        {
+
+            if (sourceBtm != null)
+            {
+                filterName = filterName.ToLower();
+                pNet.parameters = new List<int>();
+                pNet.parameters = paras;
+                var result = pNet.Process(sourceBtm, filterName);
+                imgResult.Source = UIHelper.ToWpfBitmap(result);
             }
         }
 
         string sourceImagePath;
         Bitmap sourceBtm = null;
+        string currentFilter = "";
+        List<int> paras = new List<int>();
         private void btnBrowse_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
@@ -102,5 +112,30 @@ namespace Pixels.TestApp
             }
         }
 
+        private void para1_OnTextChange(object sender, EventArgs e)
+        {
+            UpdateParameters();
+            applyFilter(currentFilter);
+        }
+
+        private void para2_OnTextChange(object sender, EventArgs e)
+        {
+            UpdateParameters();
+            applyFilter(currentFilter);
+        }
+
+        private void para3_OnTextChange(object sender, EventArgs e)
+        {
+            UpdateParameters();
+            applyFilter(currentFilter);
+        }
+
+        void UpdateParameters()
+        {
+            paras = new List<int>();
+            paras.Add(para1.currentValue);
+            paras.Add(para2.currentValue);
+            paras.Add(para3.currentValue);
+        }
     }
 }

@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pixels.TestApp"
+        xmlns:comp="clr-namespace:Pixels.TestApp.Components"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="720" Width="1280">
     <DockPanel>
         <Grid Width="200" DockPanel.Dock="Left" Background="LightBlue">
             <ScrollViewer HorizontalScrollBarVisibility="Hidden">
@@ -24,7 +25,27 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0" Background="White">
-					<Image Name="imgSource" Stretch="Uniform" Margin="20" />
+                    <DockPanel Margin="20">
+                        <Grid DockPanel.Dock="Bottom" MinHeight="200">
+                            <WrapPanel Name="pnlParams">
+                                <StackPanel Margin="0,0,10,0">
+                                    <Label Content="Param 1" VerticalContentAlignment="Center"></Label>
+                                    <comp:NumbericUpDown x:Name="para1" currentValue="150" OnTextChange="para1_OnTextChange" />
+                                </StackPanel>
+                                <StackPanel Margin="0,0,10,0">
+                                    <Label Content="Param 2" VerticalContentAlignment="Center"></Label>
+                                    <comp:NumbericUpDown x:Name="para2" currentValue="500" OnTextChange="para2_OnTextChange" />
+                                </StackPanel>
+                                <StackPanel Margin="0,0,10,0">
+                                    <Label Content="Param 3" VerticalContentAlignment="Center"></Label>
+                                    <comp:NumbericUpDown x:Name="para3" currentValue="300" OnTextChange="para3_OnTextChange" />
+                                </StackPanel>
+                            </WrapPanel>  
+                        </Grid>
+                        <Grid>
+                            <Image Name="imgSource" Stretch="Uniform" Margin="20" />
+                        </Grid>
+                    </DockPanel>
                 </Grid>
 				<Grid Grid.Column="1" Background="White">
 					<Image Name="imgResult" Stretch="Uniform" Margin="20" />
