@@ -50,6 +50,7 @@ namespace Pixels.Core
                     if (filterInfo.Category == "TintColor")
                     {
                         colorTintFilter.Load(currentBmp);
+                        colorTintFilter.parameters = parameters;
                         colorTintFilter.Apply(filterName);
                     }
                     else if (filterInfo.Category == "Gamma")

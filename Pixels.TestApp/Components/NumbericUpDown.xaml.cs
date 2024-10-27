@@ -26,19 +26,20 @@ namespace Pixels.TestApp.Components
         }
         public event EventHandler OnTextChange;
 
-        private int _number;
+        private int _number=0;
 
         public int currentValue
         {
             get { return _number; }
-            set { _number = value;
+            set { 
+                _number = value;
                 try
                 {
                     tbxNumber.Text = _number.ToString("0");
+                    sldrValue.Value = currentValue;
                 }
                 catch (Exception)
                 {
-
                 }
             }
         }
@@ -46,40 +47,33 @@ namespace Pixels.TestApp.Components
         bool isTouched = false;
         private void tbxNumber_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(tbxNumber.IsFocused && isTouched)
-            {
-                isTouched = false;
-                   currentValue++;
-                OnTextChange?.Invoke(currentValue, null);
-            }
+            
         }
 
         private void tbxNumber_KeyUp(object sender, KeyEventArgs e)
         {
-            isTouched = false;
-            if (e.Key == Key.Up)
+            if (isTouched)
             {
-                currentValue++;
+                int cc = 0;
+                int.TryParse(tbxNumber.Text, out cc);
+                currentValue = cc;
+                sldrValue.Value = currentValue;
+                isTouched= false;
             }
-            else if (e.Key == Key.Down)
-            {
-                currentValue--;
-            }
-            OnTextChange?.Invoke(currentValue, null);
+
         }
 
-        private void btnUp_Click(object sender, RoutedEventArgs e)
+        private void sldrValue_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            isTouched = false;
-            currentValue++;
+            currentValue = (int)sldrValue.Value;
+            tbxNumber.Text = currentValue.ToString();
             OnTextChange?.Invoke(currentValue, null);
+            //OnTextChange?.Invoke(currentValue, null);
         }
 
-        private void btnDown_Click(object sender, RoutedEventArgs e)
+        private void tbxNumber_GotFocus(object sender, RoutedEventArgs e)
         {
-            isTouched = false;
-            currentValue--;
-            OnTextChange?.Invoke(currentValue, null);
+            isTouched = true;
         }
     }
 }

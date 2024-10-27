@@ -10,6 +10,7 @@ namespace Pixels.Core.Filters
 {
     public unsafe class ColorTint : PixelsProcessor
     {
+        public List<int> parameters { get; set; }
         Random rnd = new Random();
         public ColorTint()
         {
@@ -94,14 +95,23 @@ namespace Pixels.Core.Filters
         public void vintage()
         {
             Point size = PixelSize;
+            int rP = 120;
+            int gP = 70;
+            int bP = 13;
+            if (parameters.Count > 0)
+                rP = parameters[0];
+            if (parameters.Count > 1)
+                gP = parameters[1];
+            if (parameters.Count > 2)
+                bP = parameters[2];
             for (int y = 0; y < size.Y; y++)
             {
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 120);
-                    pPixel->green = CheckByte(pPixel->green + 70);
-                    pPixel->blue = CheckByte(pPixel->blue + 13);
+                    pPixel->red = CheckByte(pPixel->red + rP);
+                    pPixel->green = CheckByte(pPixel->green + gP);
+                    pPixel->blue = CheckByte(pPixel->blue + bP);
 
                     pPixel++;
                 }
@@ -190,14 +200,23 @@ namespace Pixels.Core.Filters
         public void haze()
         {
             Point size = PixelSize;
+            int rP = 120;
+            int gP = 70;
+            int bP = 13;
+            if (parameters.Count > 0)
+                rP = parameters[0];
+            if (parameters.Count > 1)
+                gP = parameters[1];
+            if (parameters.Count > 2)
+                bP = parameters[2];
             for (int y = 0; y < size.Y; y++)
             {
                 PixelData* pPixel = PixelAt(0, y);
                 for (int x = 0; x < size.X; x++)
                 {
-                    pPixel->red = CheckByte(pPixel->red + 90);
-                    pPixel->green = CheckByte(pPixel->green + 90);
-                    pPixel->blue = CheckByte(pPixel->blue + 10);
+                    pPixel->red = CheckByte(pPixel->red + rP);
+                    pPixel->green = CheckByte(pPixel->green + gP);
+                    pPixel->blue = CheckByte(pPixel->blue + bP);
 
                     pPixel++;
                 }
@@ -898,7 +917,30 @@ namespace Pixels.Core.Filters
                 }
             */
         }
+        public void sepia()
+        {
+            Point size = PixelSize;
+            for (int y = 0; y < size.Y; y++)
+            {
+                PixelData* pPixel = PixelAt(0, y);
+                for (int x = 0; x < size.X; x++)
+                {
+                    pPixel->red = CheckByte(pPixel->red + 200);
+                    pPixel->green = CheckByte(pPixel->green - 50);
+                    pPixel->blue = CheckByte(pPixel->blue * 0.5);
 
+                    pPixel++;
+                }
+            }
+
+            /*
+                 for (i = 0; i < imgData.data.length; i += 4) {
+                    imgData.data[i] = imgData.data[i] + 200;
+                    imgData.data[i + 1] = imgData.data[i + 1] - 50;
+                    imgData.data[i + 2] = imgData.data[i + 2] * 0.5;
+                }
+            */
+        }
     }
 }
 

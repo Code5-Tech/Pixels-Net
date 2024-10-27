@@ -5,9 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Pixels.TestApp.Components"
              mc:Ignorable="d" >
-    <StackPanel Orientation="Horizontal">
-        <Button Width="30" Height="40" Name="btnDown" Click="btnDown_Click" Content="&lt;" FontWeight="Bold"></Button>
-        <TextBox Width="60" Name="tbxNumber" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" IsEnabled="False" FontWeight="SemiBold" FontSize="16" TextChanged="tbxNumber_TextChanged" KeyUp="tbxNumber_KeyUp"></TextBox>
-        <Button Width="30" Height="40" Name="btnUp" Click="btnUp_Click" Content="&gt;" FontWeight="Bold"></Button>
+	<StackPanel Orientation="Horizontal">
+		<TextBox Width="40" Name="tbxNumber" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GotFocus="tbxNumber_GotFocus"
+				 IsEnabled="True" FontWeight="SemiBold" FontSize="12" TextChanged="tbxNumber_TextChanged" KeyUp="tbxNumber_KeyUp"></TextBox>
+		<Slider Width="90" Value="0" Minimum="0" Maximum="255" VerticalAlignment="Center" Margin="5" Name="sldrValue" ValueChanged="sldrValue_ValueChanged">
+			
+		</Slider>
     </StackPanel>
 </UserControl>
