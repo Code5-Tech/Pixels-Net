@@ -15,9 +15,13 @@
             </ScrollViewer>
         </Grid>
         <DockPanel>
-            <Grid DockPanel.Dock="Top" Height="60" Background="LightYellow">
-                <Button Width="100" Height="40" Content="Browse..." Name="btnBrowse" Click="btnBrowse_Click" HorizontalAlignment="Left" Margin="10" />
-            </Grid>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Height="60" Background="LightYellow">
+                <Button Width="100" Height="40" Content="Browse..." Name="btnBrowse" 
+						Click="btnBrowse_Click" HorizontalAlignment="Left" Margin="10" />
+				<Button Width="130" Height="40" Content="Save this result" Name="btnSaveFilter" 
+					Click="btnSaveFilter_Click" HorizontalAlignment="Left" Margin="10" />
+				<Label Name="lblMsg" Content="" />
+			</StackPanel>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>

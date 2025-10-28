@@ -35,72 +35,69 @@ namespace Pixels.Core.Filters
 
         public void add_horizontal_line()
         {
-            Point size = PixelSize;
-            int inc = 0;
-            for (int y = 0; y < size.Y; y++)
-            {
-                PixelData* pPixel = PixelAt(0, y);
-                for (int x = 0; x < size.X; x++)
-                {
-                    inc += 1;
-                    if (inc > 255)
-                    {
-                        inc = 0;
-                    }
-                    var avg = (pPixel->red + pPixel->green + pPixel->blue) / 3;
+            LoadPixels();
 
-                    pPixel->red = CheckByte(avg + inc);
-                    pPixel->green = CheckByte(avg + 70);
-                    pPixel->blue = CheckByte(avg + 20);
-                    pPixel++;
-                }
+            int inc = 0;
+            for (int i = 0; i < pixelsList.Length; i += 4)
+            {
+                inc++;
+                if (inc > 255)
+                    inc = 0;
+
+                // Average of R,G,B
+                int avg = (pixelsList[i] + pixelsList[i + 1] + pixelsList[i + 2]) / 3;
+
+                // Apply modifications similar to JS
+                pixelsList[i+2] = CheckByte(avg + inc);   // B
+                pixelsList[i + 1] = CheckByte(avg + 70);    // G
+                pixelsList[i] = CheckByte(avg + 20);    // R
             }
+
+            SetPixels();
         }
         public void add_diagonal_lines()
         {
-            Point size = PixelSize;
-            int inc = 0;
-            for (int y = 0; y < size.Y; y++)
-            {
-                PixelData* pPixel = PixelAt(0, y);
-                for (int x = 0; x < size.X; x++)
-                {
-                    inc += 20;
-                    if (inc > 255)
-                    {
-                        inc = 0;
-                    }
-                    var avg = (pPixel->red + pPixel->green + pPixel->blue) / 3;
+            LoadPixels();
 
-                    pPixel->red = CheckByte(avg + inc);
-                    pPixel->green = CheckByte(avg + 70);
-                    pPixel->blue = CheckByte(avg + 20);
-                    pPixel++;
-                }
+            int inc = 0;
+            for (int i = 0; i < pixelsList.Length; i += 4)
+            {
+                inc+= 20;
+                if (inc > 255)
+                    inc = 0;
+
+                // Average of R,G,B
+                int avg = (pixelsList[i] + pixelsList[i + 1] + pixelsList[i + 2]) / 3;
+
+                // Apply modifications similar to JS
+                pixelsList[i+2] = CheckByte(avg + inc);   // B
+                pixelsList[i + 1] = CheckByte(avg + 70);    // G
+                pixelsList[i] = CheckByte(avg + 20);    // R
             }
+
+            SetPixels();
         }
         public void add_green_diagonal_lines()
         {
-            Point size = PixelSize;
-            int inc = 0;
-            for (int y = 0; y < size.Y; y++)
-            {
-                PixelData* pPixel = PixelAt(0, y);
-                for (int x = 0; x < size.X; x++)
-                {
-                    inc += 20;
-                    if (inc > 255)
-                    {
-                        inc = 0;
-                    }
-                    var avg = (pPixel->red + pPixel->green + pPixel->blue) / 3;
+            LoadPixels();
 
-                    pPixel->red = CheckByte(avg + 5);
-                    pPixel->green = CheckByte(avg + inc);
-                    pPixel->blue = CheckByte(avg + 20);
-                    pPixel++;
-                }
+            int inc = 0;
+            for (int i = 0; i < pixelsList.Length; i += 4)
+            {
+                inc += 20;
+                if (inc > 255)
+                    inc = 0;
+
+                // Average of R,G,B
+                int avg = (pixelsList[i] + pixelsList[i + 1] + pixelsList[i + 2]) / 3;
+
+                // Apply modifications similar to JS
+                pixelsList[i + 2] = CheckByte(avg + 5);   // B
+                pixelsList[i + 1] = CheckByte(avg + inc);    // G
+                pixelsList[i] = CheckByte(avg + 20);    // R
             }
+
+            SetPixels();
         }
     }
 }

@@ -34,101 +34,79 @@ namespace Pixels.Core.Filters
 
         public void gamma()
         {
-            Point size = PixelSize;
-            for (int y = 0; y < size.Y; y++)
+            LoadPixels();
+            for (int i = 0; i < pixelsList.Length; i += 4)
             {
-                PixelData* pPixel = PixelAt(0, y);
-                for (int x = 0; x < size.X; x++)
-                {
-                    pPixel->red = (byte)(Math.Pow(pPixel->red / 255, 5) * 255);
-                    pPixel->green = (byte)(Math.Pow(pPixel->green / 255, 5) * 255);
-                    pPixel->blue = (byte)(Math.Pow(pPixel->blue / 255, 5) * 255);
-
-                    pPixel++;
-                }
+                pixelsList[i] = CheckByte((int)(Math.Pow(pixelsList[i] / 255.0, 5.0) * 255.0)); 
             }
+            SetPixels();
         }
         public void teal_gamma()
         {
-            Point size = PixelSize;
-            for (int y = 0; y < size.Y; y++)
+            LoadPixels();
+            for (int i = 0; i < pixelsList.Length; i += 4)
             {
-                PixelData* pPixel = PixelAt(0, y);
-                for (int x = 0; x < size.X; x++)
-                {
-                    pPixel->red = (byte)(Math.Pow(pPixel->red / 255, 5) * 255);
-                    pPixel++;
-                }
+                //imgData.data[i] = Math.pow(imgData.data[i] / 255, 5) * 255;
+                pixelsList[i+2] = CheckByte((int)(Math.Pow(pixelsList[i+2] / 255.0, 5.0) * 255.0));     // R
             }
+            SetPixels();
         }
         public void purple_gamma()
         {
-            Point size = PixelSize;
-            for (int y = 0; y < size.Y; y++)
+            LoadPixels();
+            for (int i = 0; i < pixelsList.Length; i += 4)
             {
-                PixelData* pPixel = PixelAt(0, y);
-                for (int x = 0; x < size.X; x++)
-                {
-                    pPixel->green = (byte)(Math.Pow(pPixel->green / 255, 5) * 255);
-                    pPixel++;
-                }
+                //imgData.data[i + 1] = Math.pow(imgData.data[i + 1] / 255, 5) * 255;
+                pixelsList[i + 1] = CheckByte((int)(Math.Pow(pixelsList[i + 1] / 255.0, 5.0) * 255.0));     // R
             }
+            SetPixels();
         } 
         
         public void yellow_gamma()
         {
-            Point size = PixelSize;
-            for (int y = 0; y < size.Y; y++)
+            LoadPixels();
+            for (int i = 0; i < pixelsList.Length; i += 4)
             {
-                PixelData* pPixel = PixelAt(0, y);
-                for (int x = 0; x < size.X; x++)
-                {
-                    pPixel->blue = (byte)(Math.Pow(pPixel->blue / 255, 5) * 255);
-                    pPixel++;
-                }
+                //imgData.data[i + 2] = Math.pow(imgData.data[i + 2] / 255, 5) * 255;
+                pixelsList[i] = CheckByte((int)(Math.Pow(pixelsList[i] / 255.0, 5.0) * 255.0));     // R
             }
+            SetPixels();
         }
         public void bluered_gamma()
         {
-            Point size = PixelSize;
-            for (int y = 0; y < size.Y; y++)
+            LoadPixels();
+            for (int i = 0; i < pixelsList.Length; i += 4)
             {
-                PixelData* pPixel = PixelAt(0, y);
-                for (int x = 0; x < size.X; x++)
-                {
-                    pPixel->red = (byte)(Math.Pow(pPixel->red / 255, 5) * 255);
-                    pPixel->green = (byte)(Math.Pow(pPixel->green / 255, 5) * 255);
-                    pPixel++;
-                }
+                //imgData.data[i] = Math.pow(imgData.data[i] / 255, 5) * 255;
+                //imgData.data[i + 1] = Math.pow(imgData.data[i + 1] / 255, 5) * 255;
+                pixelsList[i + 2] = CheckByte((int)(Math.Pow(pixelsList[i + 2] / 255.0, 5.0) * 255.0));
+                pixelsList[i + 1] = CheckByte((int)(Math.Pow(pixelsList[i + 1] / 255.0, 5.0) * 255.0));
             }
+            SetPixels();
         }
         public void green_gamma()
         {
-            Point size = PixelSize;
-            for (int y = 0; y < size.Y; y++)
+            LoadPixels();
+            for (int i = 0; i < pixelsList.Length; i += 4)
             {
-                PixelData* pPixel = PixelAt(0, y);
-                for (int x = 0; x < size.X; x++)
-                {
-                    pPixel->red = (byte)(Math.Pow(pPixel->red / 255, 5) * 255);
-                    pPixel->blue = (byte)(Math.Pow(pPixel->blue / 255, 5) * 255);
-                    pPixel++;
-                }
+                //  imgData.data[i] = Math.pow(imgData.data[i] / 255, 5) * 255;
+                //imgData.data[i + 2] = Math.pow(imgData.data[i + 2] / 255, 5) * 255;
+                pixelsList[i + 2] = CheckByte((int)(Math.Pow(pixelsList[i + 2] / 255.0, 5.0) * 255.0));
+                pixelsList[i] = CheckByte((int)(Math.Pow(pixelsList[i] / 255.0, 5.0) * 255.0));
             }
+            SetPixels();
         }
         public void red_gamma()
         {
-            Point size = PixelSize;
-            for (int y = 0; y < size.Y; y++)
+            LoadPixels();
+            for (int i = 0; i < pixelsList.Length; i += 4)
             {
-                PixelData* pPixel = PixelAt(0, y);
-                for (int x = 0; x < size.X; x++)
-                {
-                    pPixel->green = (byte)(Math.Pow(pPixel->green / 255, 5) * 255);
-                    pPixel->blue = (byte)(Math.Pow(pPixel->blue / 255, 5) * 255);
-                    pPixel++;
-                }
+                // imgData.data[i + 1] = Math.pow(imgData.data[i + 1] / 255, 5) * 255;
+                //imgData.data[i + 2] =  Math.pow(imgData.data[i + 2] / 255, 5) * 255;
+                pixelsList[i + 1] = CheckByte((int)(Math.Pow(pixelsList[i +1] / 255.0, 5.0) * 255.0));
+                pixelsList[i] = CheckByte((int)(Math.Pow(pixelsList[i] / 255.0, 5.0) * 255.0));
             }
+            SetPixels();
         }
     }
 }

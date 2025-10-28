@@ -83,6 +83,7 @@ namespace Pixels.Core
 
         private int width = 0;
 
+        protected readonly Random _random = new Random();
         private BitmapData bitmapData = null;
         private byte* pBase = null;
         protected byte[] pixelsList = null;
@@ -134,10 +135,14 @@ namespace Pixels.Core
             }
         }
 
-         protected byte CheckByte(double value)
+        protected byte CheckByte(double value)
         {
             if (value < 0) return 0;
             return (byte)Math.Min(value, 255);
+        }
+        protected int getRandomNumber(int min, int max)
+        {
+            return _random.Next(min, max);
         }
 
         protected Point PixelSize
@@ -150,7 +155,7 @@ namespace Pixels.Core
                 return new Point((int)bounds.Width, (int)bounds.Height);
             }
         }
-        
+
         protected HSLData RGBtoHSL(int Red, int Green, int Blue)
         {
             HSLData hsl = new HSLData();
@@ -312,7 +317,7 @@ namespace Pixels.Core
             }
 
             bitmapData = bitmap.LockBits(bounds, ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
-            
+
             pBase = (Byte*)bitmapData.Scan0.ToPointer();
         }
         protected void LoadPixels()

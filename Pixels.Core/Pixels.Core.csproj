@@ -49,7 +49,6 @@
     <Compile Include="Filters\NoiseFilter.cs" />
     <Compile Include="Filters\OffsetFilter.cs" />
     <Compile Include="Filters\SpecksFilter.cs" />
-    <Compile Include="Globals.cs" />
     <Compile Include="Models\FilterInfo.cs" />
     <Compile Include="PixelNet.cs" />
     <Compile Include="PixelProcessor.cs" />

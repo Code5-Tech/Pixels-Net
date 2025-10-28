@@ -10,11 +10,9 @@ namespace Pixels.Core.Filters
 {
     public unsafe class NoiseFilter : PixelsProcessor
     {
-        Random rnd = null;
         public void Load(Bitmap btemp)
         {
             Bitmap = btemp;
-            rnd = new Random();
         }
         public List<string> FiltersList()
         {
@@ -35,24 +33,21 @@ namespace Pixels.Core.Filters
 
         public void min_noise()
         {
-            var rand = (0.5 - rnd.NextDouble()) * 53f;
-            Point size = PixelSize;
-            for (int y = 0; y < size.Y; y++)
+            LoadPixels();
+
+            for (int i = 0; i < pixelsList.Length; i += 4)
             {
-                PixelData* pPixel = PixelAt(0, y);
-                for (int x = 0; x < size.X; x++)
-                {
-                    var randomColor1 = 0.6f + rnd.NextDouble() * 0.4f;
-                    var randomColor2 = 0.6f + rnd.NextDouble() * 0.4f;
-                    var randomColor3 = 0.6f + rnd.NextDouble() * 0.4f;
+                // Each channel gets a multiplier between 0.6 and 1.0
+                double randomColor1 = 0.6 + _random.NextDouble() * 0.4;
+                double randomColor2 = 0.6 + _random.NextDouble() * 0.4;
+                double randomColor3 = 0.6 + _random.NextDouble() * 0.4;
 
-                    pPixel->red = CheckByte(pPixel->red * 0.99f * randomColor1);
-                    pPixel->green = CheckByte(pPixel->green * 0.99f * randomColor2);
-                    pPixel->blue = CheckByte(pPixel->blue * 0.99f * randomColor3);
-
-                    pPixel++;
-                }
+                pixelsList[i] = CheckByte((int)(pixelsList[i] * 0.99 * randomColor1)); // B
+                pixelsList[i + 1] = CheckByte((int)(pixelsList[i + 1] * 0.99 * randomColor2)); // G
+                pixelsList[i + 2] = CheckByte((int)(pixelsList[i + 2] * 0.99 * randomColor3)); // R
             }
+
+            SetPixels();
             /*
                 let rand = (0.5 - Math.random()) * 53;
                 for (i = 0; i < imgData.data.length; i += 4) {
@@ -67,23 +62,6 @@ namespace Pixels.Core.Filters
         }
         public void green_med_noise()
         {
-            var rand = (0.5 - rnd.NextDouble()) * 9f;
-            Point size = PixelSize;
-            for (int y = 0; y < size.Y; y++)
-            {
-                PixelData* pPixel = PixelAt(0, y);
-                for (int x = 0; x < size.X; x++)
-                {
-                    var randomColor1 = 0.6f + rnd.NextDouble() * 0.5f;
-                    var randomColor2 = 0.6f + rnd.NextDouble() * 0.5f;
-                    var randomColor3 = 0.6f + rnd.NextDouble() * 0.5f;
-                    pPixel->red = CheckByte(pPixel->green * 0.5f * randomColor1);
-                    pPixel->green = CheckByte(pPixel->blue * 0.99f * randomColor2);
-                    pPixel->blue = CheckByte(pPixel->red * 0.99f * randomColor3);
-
-                    pPixel++;
-                }
-            }
 
             /*
                 let rand = (0.5 - Math.random()) * 9;
@@ -97,29 +75,26 @@ namespace Pixels.Core.Filters
                     imgData.data[i + 2] = imgData.data[i] * 0.99 * randomColor3;
                 }
              */
+
+            LoadPixels();
+            for (int i = 0; i < pixelsList.Length; i += 4)
+            {
+                // Each channel gets a multiplier between 0.6 and 1.0
+                double randomColor1 = 0.6 + _random.NextDouble() * 0.5;
+                double randomColor2 = 0.6 + _random.NextDouble() * 0.5;
+                double randomColor3 = 0.6 + _random.NextDouble() * 0.5;
+
+                pixelsList[i + 2] = CheckByte((int)(pixelsList[i+1] * 0.5 * randomColor1)); // B
+                pixelsList[i + 1] = CheckByte((int)(pixelsList[i] * 0.99 * randomColor2)); // G
+                pixelsList[i] = CheckByte((int)(pixelsList[i+2] * 0.99 * randomColor3)); // R
+            }
+            SetPixels();
         }
         public void purple_min_noise()
         {
-            var rand = (0.5 - rnd.NextDouble()) * 1f;
-            Point size = PixelSize;
-            for (int y = 0; y < size.Y; y++)
-            {
-                PixelData* pPixel = PixelAt(0, y);
-                for (int x = 0; x < size.X; x++)
-                {
-                    var randomColor1 = 0.6f + rnd.NextDouble() * 0.5f;
-                    var randomColor2 = 0.6f + rnd.NextDouble() * 0.2f;
-                    var randomColor3 = 0.6f + rnd.NextDouble() * 0.8f;
 
-                    pPixel->red = CheckByte(pPixel->red * 0.99f * randomColor1);
-                    pPixel->green = CheckByte(pPixel->green * 0.99f * randomColor2);
-                    pPixel->blue = CheckByte(pPixel->blue * 0.99f * randomColor3);
-
-                    pPixel++;
-                }
-            }
             /*
-                let rand = (0.5 - Math.random()) * 1;
+               
                 for (i = 0; i < imgData.data.length; i += 4) {
                     let randomColor1 = 0.6 + Math.random() * 0.5;
                     let randomColor2 = 0.6 + Math.random() * 0.2;
@@ -129,26 +104,22 @@ namespace Pixels.Core.Filters
                     imgData.data[i + 2] = imgData.data[i + 2] * 0.99 * randomColor3;
                 }
              */
+            LoadPixels();
+            for (int i = 0; i < pixelsList.Length; i += 4)
+            {
+                // Each channel gets a multiplier between 0.6 and 1.0
+                double randomColor1 = 0.6 + _random.NextDouble() * 0.5;
+                double randomColor2 = 0.6 + _random.NextDouble() * 0.2;
+                double randomColor3 = 0.6 + _random.NextDouble() * 0.8;
+
+                pixelsList[i + 2] = CheckByte((int)(pixelsList[i + 2] * 0.99 * randomColor1)); // B
+                pixelsList[i + 1] = CheckByte((int)(pixelsList[i+1] * 0.99 * randomColor2)); // G
+                pixelsList[i] = CheckByte((int)(pixelsList[i] * 0.99 * randomColor3)); // R
+            }
+            SetPixels();
         }
         public void dark_purple_min_noise()
         {
-            var rand = (0.5 - rnd.NextDouble()) * 9f;
-            Point size = PixelSize;
-            for (int y = 0; y < size.Y; y++)
-            {
-                PixelData* pPixel = PixelAt(0, y);
-                for (int x = 0; x < size.X; x++)
-                {
-                    var randomColor1 = 0.6f + rnd.NextDouble() * 0.5f;
-                    var randomColor2 = 0.6f + rnd.NextDouble() * 0.5f;
-                    var randomColor3 = 0.6f + rnd.NextDouble() * 0.5f;
-                    pPixel->red = CheckByte(pPixel->red * 0.5f * randomColor1);
-                    pPixel->green = CheckByte(pPixel->green * 0.3f * randomColor2);
-                    pPixel->blue = CheckByte(pPixel->blue * 0.99f * randomColor3);
-
-                    pPixel++;
-                }
-            }
             /*
                 let rand = (0.5 - Math.random()) * 9;
                 for (i = 0; i < imgData.data.length; i += 4) {
@@ -161,27 +132,23 @@ namespace Pixels.Core.Filters
                     imgData.data[i + 2] = imgData.data[i + 2] * 0.99 * randomColor3;
                 }
              */
+
+            LoadPixels();
+            for (int i = 0; i < pixelsList.Length; i += 4)
+            {
+                // Each channel gets a multiplier between 0.6 and 1.0
+                double randomColor1 = 0.6 + _random.NextDouble() * 0.5;
+                double randomColor2 = 0.6 + _random.NextDouble() * 0.5;
+                double randomColor3 = 0.6 + _random.NextDouble() * 0.5;
+
+                pixelsList[i + 2] = CheckByte((int)(pixelsList[i + 2] * 0.5 * randomColor1)); // B
+                pixelsList[i + 1] = CheckByte((int)(pixelsList[i + 1] * 0.3 * randomColor2)); // G
+                pixelsList[i] = CheckByte((int)(pixelsList[i] * 0.99 * randomColor3)); // R
+            }
+            SetPixels();
         }
         public void teal_min_noise()
         {
-            var rand = (0.5 - rnd.NextDouble()) * 1f;
-            Point size = PixelSize;
-            for (int y = 0; y < size.Y; y++)
-            {
-                PixelData* pPixel = PixelAt(0, y);
-                for (int x = 0; x < size.X; x++)
-                {
-                    var randomColor1 = 0.6f + rnd.NextDouble() * 0.1f;
-                    var randomColor2 = 0.6f + rnd.NextDouble() * 0.5f;
-                    var randomColor3 = 0.6f + rnd.NextDouble() * 0.5f;
-
-                    pPixel->red = CheckByte(pPixel->red * 0.99f * randomColor1);
-                    pPixel->green = CheckByte(pPixel->green * 0.99f * randomColor2);
-                    pPixel->blue = CheckByte(pPixel->blue * 0.99f * randomColor3);
-
-                    pPixel++;
-                }
-            }
             /*
                 let rand = (0.5 - Math.random()) * 1;
                 for (i = 0; i < imgData.data.length; i += 4) {
@@ -193,27 +160,23 @@ namespace Pixels.Core.Filters
                     imgData.data[i + 2] = imgData.data[i + 2] * 0.99 * randomColor3;
                 }
              */
+
+            LoadPixels();
+            for (int i = 0; i < pixelsList.Length; i += 4)
+            {
+                // Each channel gets a multiplier between 0.6 and 1.0
+                double randomColor1 = 0.6 + _random.NextDouble() * 0.1;
+                double randomColor2 = 0.6 + _random.NextDouble() * 0.5;
+                double randomColor3 = 0.6 + _random.NextDouble() * 0.5;
+
+                pixelsList[i + 2] = CheckByte((int)(pixelsList[i + 2] * 0.99 * randomColor1)); // B
+                pixelsList[i + 1] = CheckByte((int)(pixelsList[i + 1] * 0.99 * randomColor2)); // G
+                pixelsList[i] = CheckByte((int)(pixelsList[i] * 0.99 * randomColor3)); // R
+            }
+            SetPixels();
         }
         public void blue_min_noise()
         {
-            var rand = (0.5 - rnd.NextDouble()) * 1f;
-            Point size = PixelSize;
-            for (int y = 0; y < size.Y; y++)
-            {
-                PixelData* pPixel = PixelAt(0, y);
-                for (int x = 0; x < size.X; x++)
-                {
-                    var randomColor1 = 0.6f + rnd.NextDouble() * 0.1f;
-                    var randomColor2 = 0.6f + rnd.NextDouble() * 0.2f;
-                    var randomColor3 = 0.6f + rnd.NextDouble() * 0.7f;
-
-                    pPixel->red = CheckByte(pPixel->red * 0.99f * randomColor1);
-                    pPixel->green = CheckByte(pPixel->green * 0.99f * randomColor2);
-                    pPixel->blue = CheckByte(pPixel->blue * 0.99f * randomColor3);
-
-                    pPixel++;
-                }
-            }
             /*
                 let rand = (0.5 - Math.random()) * 1;
                 for (i = 0; i < imgData.data.length; i += 4) {
@@ -225,27 +188,23 @@ namespace Pixels.Core.Filters
                     imgData.data[i + 2] = imgData.data[i + 2] * 0.99 * randomColor3;
                 }
              */
+            LoadPixels();
+            for (int i = 0; i < pixelsList.Length; i += 4)
+            {
+                // Each channel gets a multiplier between 0.6 and 1.0
+                double randomColor1 = 0.6 + _random.NextDouble() * 0.1;
+                double randomColor2 = 0.6 + _random.NextDouble() * 0.2;
+                double randomColor3 = 0.6 + _random.NextDouble() * 0.7;
+
+                pixelsList[i + 2] = CheckByte((int)(pixelsList[i + 2] * 0.99 * randomColor1)); // B
+                pixelsList[i + 1] = CheckByte((int)(pixelsList[i + 1] * 0.99 * randomColor2)); // G
+                pixelsList[i] = CheckByte((int)(pixelsList[i] * 0.99 * randomColor3)); // R
+            }
+            SetPixels();
         }
         public void green_min_noise()
         {
-            var rand = (0.5 - rnd.NextDouble()) * 1f;
-            Point size = PixelSize;
-            for (int y = 0; y < size.Y; y++)
-            {
-                PixelData* pPixel = PixelAt(0, y);
-                for (int x = 0; x < size.X; x++)
-                {
-                    var randomColor1 = 0.6f + rnd.NextDouble() * 0.1f;
-                    var randomColor2 = 0.6f + rnd.NextDouble() * 0.5f;
-                    var randomColor3 = 0.6f + rnd.NextDouble() * 0.4f;
-
-                    pPixel->red = CheckByte(pPixel->red * 0.99f * randomColor1);
-                    pPixel->green = CheckByte(pPixel->green * 0.99f * randomColor2);
-                    pPixel->blue = CheckByte(pPixel->blue * 0.99f * randomColor3);
-
-                    pPixel++;
-                }
-            }
+            
             /*
                 let rand = (0.5 - Math.random()) * 1;
                 for (i = 0; i < imgData.data.length; i += 4) {
@@ -257,27 +216,22 @@ namespace Pixels.Core.Filters
                     imgData.data[i + 2] = imgData.data[i + 2] * 0.99 * randomColor3;
                 }
              */
+            LoadPixels();
+            for (int i = 0; i < pixelsList.Length; i += 4)
+            {
+                // Each channel gets a multiplier between 0.6 and 1.0
+                double randomColor1 = 0.6 + _random.NextDouble() * 0.1;
+                double randomColor2 = 0.6 + _random.NextDouble() * 0.5;
+                double randomColor3 = 0.6 + _random.NextDouble() * 0.4;
+
+                pixelsList[i + 2] = CheckByte((int)(pixelsList[i + 2] * 0.99 * randomColor1)); // B
+                pixelsList[i + 1] = CheckByte((int)(pixelsList[i + 1] * 0.99 * randomColor2)); // G
+                pixelsList[i] = CheckByte((int)(pixelsList[i] * 0.99 * randomColor3)); // R
+            }
+            SetPixels();
         }
         public void red_min_noise()
         {
-            var rand = (0.5 - rnd.NextDouble()) * 1f;
-            Point size = PixelSize;
-            for (int y = 0; y < size.Y; y++)
-            {
-                PixelData* pPixel = PixelAt(0, y);
-                for (int x = 0; x < size.X; x++)
-                {
-                    var randomColor1 = 0.6f + rnd.NextDouble() * 0.6f;
-                    var randomColor2 = 0.6f + rnd.NextDouble() * 0.4f;
-                    var randomColor3 = 0.6f + rnd.NextDouble() * 0.4f;
-
-                    pPixel->red = CheckByte(pPixel->red * 0.99f * randomColor1);
-                    pPixel->green = CheckByte(pPixel->green * 0.99f * randomColor2);
-                    pPixel->blue = CheckByte(pPixel->blue * 0.99f * randomColor3);
-
-                    pPixel++;
-                }
-            }
             /*
                 let rand = (0.5 - Math.random()) * 1;
                 for (i = 0; i < imgData.data.length; i += 4) {
@@ -289,27 +243,22 @@ namespace Pixels.Core.Filters
                     imgData.data[i + 2] = imgData.data[i + 2] * 0.99 * randomColor3;
                 }
              */
+            LoadPixels();
+            for (int i = 0; i < pixelsList.Length; i += 4)
+            {
+                // Each channel gets a multiplier between 0.6 and 1.0
+                double randomColor1 = 0.6 + _random.NextDouble() * 0.6;
+                double randomColor2 = 0.6 + _random.NextDouble() * 0.4;
+                double randomColor3 = 0.6 + _random.NextDouble() * 0.4;
+
+                pixelsList[i + 2] = CheckByte((int)(pixelsList[i + 2] * 0.99 * randomColor1)); // B
+                pixelsList[i + 1] = CheckByte((int)(pixelsList[i + 1] * 0.99 * randomColor2)); // G
+                pixelsList[i] = CheckByte((int)(pixelsList[i] * 0.99 * randomColor3)); // R
+            }
+            SetPixels();
         }
         public void pink_min_noise()
         {
-            var rand = (0.5 - rnd.NextDouble()) * 1f;
-            Point size = PixelSize;
-            for (int y = 0; y < size.Y; y++)
-            {
-                PixelData* pPixel = PixelAt(0, y);
-                for (int x = 0; x < size.X; x++)
-                {
-                    var randomColor1 = 0.6f + rnd.NextDouble() * 0.6f;
-                    var randomColor2 = 0.6f + rnd.NextDouble() * 0.1f;
-                    var randomColor3 = 0.6f + rnd.NextDouble() * 0.4f;
-
-                    pPixel->red = CheckByte(pPixel->red * 0.99f * randomColor1);
-                    pPixel->green = CheckByte(pPixel->green * 0.99f * randomColor2);
-                    pPixel->blue = CheckByte(pPixel->blue * 0.99f * randomColor3);
-
-                    pPixel++;
-                }
-            }
             /*
                 let rand = (0.5 - Math.random()) * 1;
                 for (i = 0; i < imgData.data.length; i += 4) {
@@ -321,6 +270,19 @@ namespace Pixels.Core.Filters
                     imgData.data[i + 2] = imgData.data[i + 2] * 0.99 * randomColor3;
                 }
              */
+            LoadPixels();
+            for (int i = 0; i < pixelsList.Length; i += 4)
+            {
+                // Each channel gets a multiplier between 0.6 and 1.0
+                double randomColor1 = 0.6 + _random.NextDouble() * 0.6;
+                double randomColor2 = 0.6 + _random.NextDouble() * 0.1;
+                double randomColor3 = 0.6 + _random.NextDouble() * 0.4;
+
+                pixelsList[i + 2] = CheckByte((int)(pixelsList[i + 2] * 0.99 * randomColor1)); // B
+                pixelsList[i + 1] = CheckByte((int)(pixelsList[i + 1] * 0.99 * randomColor2)); // G
+                pixelsList[i] = CheckByte((int)(pixelsList[i] * 0.99 * randomColor3)); // R
+            }
+            SetPixels();
         }   
         public void matrix()
         {
@@ -328,7 +290,7 @@ namespace Pixels.Core.Filters
             int randomNumber = 0;
             for (int i = 0; i < pixelsList.Length; i+=4)
             {
-                randomNumber = rnd.Next(0, 200);
+                randomNumber = getRandomNumber(0, 200);
                 int addition1 = 0, addition2 = 0;
                 if (randomNumber > 0 && randomNumber < 50)
                 {
@@ -407,7 +369,7 @@ namespace Pixels.Core.Filters
             int randomNumber = 0;
             for (int i = 0; i < pixelsList.Length; i+=4)
             {
-                randomNumber = rnd.Next(0, 200);
+                randomNumber = getRandomNumber(0, 200);
                 int addition1 = 0, addition2 = 0;
                 if (randomNumber > 0 && randomNumber < 50)
                 {
@@ -486,7 +448,7 @@ namespace Pixels.Core.Filters
             int randomNumber = 0;
             for (int i = 0; i < pixelsList.Length; i += 4)
             {
-                randomNumber = rnd.Next(0, 200);
+                randomNumber = getRandomNumber(0, 200);
                 int addition1 = 0, addition2 = 0;
                 if (randomNumber > 0 && randomNumber < 50)
                 {
